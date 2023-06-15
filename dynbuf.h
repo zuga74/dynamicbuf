@@ -24,6 +24,7 @@ extern "C" {
 #define NULL	0
 #endif
 
+
 struct dynamic_buf_item {
 
   struct dynamic_buf_item * next;
@@ -36,6 +37,7 @@ struct dynamic_buf_item {
 
 typedef struct _dynamic_buf {
   struct dynamic_buf_item  * first;
+  BOOL busy;
 } dynamic_buf_t;
 
 typedef void (* dynamic_buf_proc_t)(unsigned char * data, size_t data_len);
@@ -60,6 +62,10 @@ BOOL dynamic_buf_is_empty(dynamic_buf_t * dynamic_buf);
 
 //enumeration of a dynamic buffer into a function proc
 BOOL dynamic_buf_enum(dynamic_buf_t * dynamic_buf, dynamic_buf_proc_t proc);
+
+//is dynamic buffer busy
+BOOL dynamic_buf_is_busy(dynamic_buf_t * dynamic_buf);
+
 
 #ifdef __cplusplus
 }

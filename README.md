@@ -2,9 +2,11 @@
 dynamic fifo buffer
 
 ```
+#include "dynbuf.h"
+
 main()
 {
-  static dynamic_buf_t dynamic_buf;
+  dynamic_buf_t dynamic_buf;
   char buf[128];
   size_t data_len;
 

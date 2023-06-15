@@ -20,6 +20,9 @@ extern "C" {
 #define FALSE	0
 #endif
 
+#ifndef NULL
+#define NULL	0
+#endif
 
 struct dynamic_buf_item {
 

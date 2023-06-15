@@ -31,13 +31,13 @@ main()
   //put "dddddd"
   dynamic_buf_put(&dynamic_buf, "dddddd", 6);
 
-  //get "aaa"
+  //get "aaa", data_len will be 3
   dynamic_buf_get(&dynamic_buf, buf, sizeof(buf), &data_len); 
 
-  //get "bbbb"
+  //get "bbbb", data_len will be 4
   dynamic_buf_get(&dynamic_buf, buf, sizeof(buf), &data_len); 
 
-  //get "cccc" without copying (fast) in on_get_no_copy function
+  //get "ccccc" without copying (fast) in on_get_no_copy function
   dynamic_buf_get_no_copy(&dynamic_buf, on_get_no_copy);
 
   //clear

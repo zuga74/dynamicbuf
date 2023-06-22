@@ -64,8 +64,10 @@ BOOL dynamic_buf_is_empty(dynamic_buf_t * dynamic_buf);
 BOOL dynamic_buf_enum(dynamic_buf_t * dynamic_buf, dynamic_buf_proc_t proc);
 
 //is dynamic buffer busy
-BOOL dynamic_buf_is_busy(dynamic_buf_t * dynamic_buf);
+BOOL dynamic_buf_get_busy(dynamic_buf_t * dynamic_buf);
 
+//set dynamic buffer busy
+void dynamic_buf_set_busy(dynamic_buf_t * dynamic_buf, BOOL value);
 
 #ifdef __cplusplus
 }

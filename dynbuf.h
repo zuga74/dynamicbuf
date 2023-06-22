@@ -40,16 +40,16 @@ typedef struct _dynamic_buf {
   BOOL busy;
 } dynamic_buf_t;
 
-typedef void (* dynamic_buf_proc_t)(unsigned char * data, size_t data_len);
+typedef void (* dynamic_buf_proc_t)(void * data, size_t data_len);
 
 //init dynamic buffer
 void dynamic_buf_init(dynamic_buf_t * dynamic_buf);
 
 //put data with size date_len
-BOOL dynamic_buf_put(dynamic_buf_t * dynamic_buf, unsigned char * data, size_t data_len);
+BOOL dynamic_buf_put(dynamic_buf_t * dynamic_buf, void * data, size_t data_len);
 
 //get data into buffer buff with buffer size buf_size, data_len - size of read data
-BOOL dynamic_buf_get(dynamic_buf_t * dynamic_buf, unsigned char * buf, size_t buf_size, size_t * data_len);
+BOOL dynamic_buf_get(dynamic_buf_t * dynamic_buf, void * buf, size_t buf_size, size_t * data_len);
 
 //get data without copying into function proc
 BOOL dynamic_buf_get_no_copy(dynamic_buf_t * dynamic_buf, dynamic_buf_proc_t proc);

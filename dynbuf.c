@@ -9,7 +9,7 @@ void dynamic_buf_init(dynamic_buf_t * dynamic_buf)
   dynamic_buf->busy = FALSE;
 }
 
-BOOL dynamic_buf_put(dynamic_buf_t * dynamic_buf, unsigned char * data, size_t data_len)
+BOOL dynamic_buf_put(dynamic_buf_t * dynamic_buf, void * data, size_t data_len)
 {
   struct dynamic_buf_item  * item;
 
@@ -37,7 +37,7 @@ BOOL dynamic_buf_put(dynamic_buf_t * dynamic_buf, unsigned char * data, size_t d
   return TRUE;
 }
 
-BOOL dynamic_buf_get(dynamic_buf_t * dynamic_buf, unsigned char * buf, size_t buf_size, size_t * data_len)
+BOOL dynamic_buf_get(dynamic_buf_t * dynamic_buf, void * buf, size_t buf_size, size_t * data_len)
 {
   struct dynamic_buf_item  * item;
 
@@ -68,6 +68,8 @@ BOOL dynamic_buf_get_no_copy(dynamic_buf_t * dynamic_buf, dynamic_buf_proc_t pro
   dynamic_buf->first = item;
   return TRUE;
 }
+
+
 
 void dynamic_buf_clear(dynamic_buf_t * dynamic_buf)
 {

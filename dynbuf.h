@@ -24,25 +24,25 @@ extern "C" {
 #define NULL	0
 #endif
 
+#pragma pack(push, 1)
 
-struct dynamic_buf_item {
-
+typedef struct dynamic_buf_item {
   struct dynamic_buf_item * next;
-
   size_t data_len;
-
   unsigned char data[];
-};
+} dynamic_buf_item_t;
 
 
 typedef struct _dynamic_buf {
-  struct dynamic_buf_item  * first;
+  dynamic_buf_item_t * first;
   BOOL busy;
   size_t max_alloc_size;
   size_t alloc_size;
   size_t data_size;
   size_t count;
 } dynamic_buf_t;
+
+#pragma pack(pop)
 
 //init dynamic buffer
 void dynamic_buf_init(dynamic_buf_t * dynamic_buf, size_t max_alloc_size);

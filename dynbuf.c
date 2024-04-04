@@ -15,10 +15,10 @@ void dynamic_buf_init(dynamic_buf_t * dynamic_buf, size_t max_alloc_size)
 
 BOOL dynamic_buf_push(dynamic_buf_t * dynamic_buf, void * data, size_t data_len)
 {
-  struct dynamic_buf_item  * item;
+  dynamic_buf_item_t  * item;
   size_t alloc_size;
 
-  alloc_size = sizeof(struct dynamic_buf_item) + data_len;
+  alloc_size = sizeof(dynamic_buf_item_t) + data_len;
 
 
   if (dynamic_buf->alloc_size + alloc_size > dynamic_buf->max_alloc_size) return FALSE;
@@ -28,11 +28,11 @@ BOOL dynamic_buf_push(dynamic_buf_t * dynamic_buf, void * data, size_t data_len)
      while (item->next) {
        item = item->next;
      }
-     item->next = (struct dynamic_buf_item  *)malloc(alloc_size);
+     item->next = (dynamic_buf_item_t  *)malloc(alloc_size);
      item = item->next;
   }
   else {
-     dynamic_buf->first = (struct dynamic_buf_item  *)malloc(alloc_size);
+     dynamic_buf->first = (dynamic_buf_item_t  *)malloc(alloc_size);
      item = dynamic_buf->first;
   }
 
@@ -51,7 +51,7 @@ BOOL dynamic_buf_push(dynamic_buf_t * dynamic_buf, void * data, size_t data_len)
 
 BOOL dynamic_buf_pop(dynamic_buf_t * dynamic_buf, void * buf, size_t buf_size, size_t * data_len)
 {
-  struct dynamic_buf_item  * item;
+  dynamic_buf_item_t  * item;
   size_t alloc_size;
 
 
@@ -59,7 +59,7 @@ BOOL dynamic_buf_pop(dynamic_buf_t * dynamic_buf, void * buf, size_t buf_size, s
 
   if (!dynamic_buf->first) return FALSE;
 
-  alloc_size = sizeof(struct dynamic_buf_item) + dynamic_buf->first->data_len;
+  alloc_size = sizeof(dynamic_buf_item_t) + dynamic_buf->first->data_len;
 
 
   *data_len = dynamic_buf->first->data_len > buf_size ? buf_size : dynamic_buf->first->data_len;
@@ -77,7 +77,7 @@ BOOL dynamic_buf_pop(dynamic_buf_t * dynamic_buf, void * buf, size_t buf_size, s
 
 void dynamic_buf_clear(dynamic_buf_t * dynamic_buf)
 {
-  struct dynamic_buf_item  * item, * next;
+  dynamic_buf_item_t  * item, * next;
 
   if (!dynamic_buf->first) return;
 
@@ -122,7 +122,7 @@ size_t dynamic_buf_get_count(dynamic_buf_t * dynamic_buf)
 
 void * dynamic_buf_get_at(dynamic_buf_t * dynamic_buf, size_t index, size_t * data_len)
 {
-	  struct dynamic_buf_item  * item;
+	  dynamic_buf_item_t  * item;
 	  size_t i;
 
 	  i = 0;
@@ -142,7 +142,7 @@ void * dynamic_buf_get_at(dynamic_buf_t * dynamic_buf, size_t index, size_t * da
 
 BOOL dynamic_buf_delete_at(dynamic_buf_t * dynamic_buf, size_t index)
 {
-	  struct dynamic_buf_item  * item, * next, * prev;
+	  dynamic_buf_item_t  * item, * next, * prev;
 	  size_t i;
 
 	  i = 0;
@@ -152,7 +152,7 @@ BOOL dynamic_buf_delete_at(dynamic_buf_t * dynamic_buf, size_t index)
 		 if (index == i) {
 			 next = item->next;
 			 dynamic_buf->data_size -= item->data_len;
-			 dynamic_buf->alloc_size -= (sizeof(struct dynamic_buf_item) + item->data_len);
+			 dynamic_buf->alloc_size -= (sizeof(dynamic_buf_item_t) + item->data_len);
 			 free(item);
 			 if (prev) prev->next = next;
 			 else dynamic_buf->first = next;
